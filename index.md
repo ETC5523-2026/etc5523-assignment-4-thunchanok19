@@ -66,3 +66,6 @@ The app opens on an About tab and has four tabs in total:
   suburbs within a weekly rent budget.
 - [`run_app()`](https://etc5523-2026.github.io/etc5523-assignment-4-thunchanok19/reference/run_app.md):
   launches the Shiny app.
+
+Documentation:
+<https://etc5523-2026.github.io/etc5523-assignment-4-thunchanok19/>

@@ -63,3 +63,6 @@ The app opens on an About tab and has four tabs in total:
   quarter and year.
 - `affordable_suburbs()`: suburbs within a weekly rent budget.
 - `run_app()`: launches the Shiny app.
+
+Documentation:
+<https://etc5523-2026.github.io/etc5523-assignment-4-thunchanok19/>

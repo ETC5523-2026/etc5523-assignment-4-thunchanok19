@@ -1,0 +1,131 @@
+---
+title: "Getting started with vicrental"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with vicrental}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(vicrental)
+```
+
+`vicrental` helps people renting, or planning to rent, in Victoria explore
+rents by suburb. This vignette shows how to install the package, launch the
+app, use each tab and interpret what you see.
+
+## Install
+
+Install the package from GitHub:
+
+```{r, eval = FALSE}
+# install.packages("pak")
+pak::pak("ETC5523-2026/etc5523-assignment-4-thunchanok19")
+```
+
+## Launch the app
+
+```{r, eval = FALSE}
+library(vicrental)
+run_app()
+```
+
+The app opens on an **About** tab that explains who it is for, the question it
+answers and what each field means. The other tabs are described below.
+
+## Using the app
+
+**Compare suburbs.** Choose up to three suburbs, a property type and a number
+of bedrooms. The plot shows the median weekly rent of new lettings by quarter,
+with one line per suburb. Hover over a line to see the quarter, median rent and
+number of new lettings.
+
+**Top 10 rankings.** Choose a year, quarter, property type and number of
+bedrooms, then choose whether to rank from the most or least expensive suburbs.
+Use the slider to show between 3 and 10 suburbs. Bars are coloured by region.
+
+**Affordability.** Set a weekly rent budget, a property type, a number of
+bedrooms and how many recent quarters to average over. The table lists suburbs
+whose average rent is at or below your budget. Click a column header to sort,
+or use the search box to find a suburb.
+
+If a combination has no data, for example a house with one bedroom, the app
+shows a message instead of an empty chart.
+
+## Using the functions directly
+
+The functions behind the app can be used in your own R code. The `rentals`
+dataset is included in the package:
+
+```{r}
+head(rentals)
+```
+
+### Rent over time
+
+`summarise_rent()` returns the median rent for each quarter for one or more
+suburbs for the selected property type and number of bedrooms:
+
+```{r}
+fitzroy <- summarise_rent(
+  suburb = "Fitzroy",
+  property_type = "Flat",
+  bedrooms = 2
+)
+head(fitzroy)
+```
+
+### Highest and lowest rent suburbs
+
+`top10_rent()` ranks suburbs in one quarter for the selected property type and
+number of bedrooms. Use `n` to choose how many suburbs to show, and `highest`
+to rank from the highest or lowest rent:
+
+```{r}
+top10_rent(
+  year = 2024,
+  quarter = "Q2",
+  property_type = "Flat",
+  bedrooms = 2,
+  n = 5,
+  highest = TRUE
+)
+```
+
+### Suburbs within a budget
+
+`affordable_suburbs()` averages rent over the most recent quarters and keeps
+suburbs at or below a weekly budget:
+
+```{r}
+head(
+  affordable_suburbs(
+    budget = 450,
+    property_type = "Flat",
+    bedrooms = 2,
+    quarters = 4
+  )
+)
+```
+
+## Interpreting the outputs
+
+- **Median rent** is the middle weekly rent of new rental agreements in a
+  suburb and quarter. It describes what new tenants pay, not existing tenants.
+- **New lettings** is the number of new rental agreements in that quarter. A
+  rent based on few lettings is less reliable.
+- **Compare suburbs:** line that sits above another is a more expensive suburb. A shorter line means that suburb has no reported data for the missing quarters.
+- **Top 10 rankings:** the top bar is the most expensive or lease expensive. Colours show regions, so you can see whether expensive or cheap suburbs cluster in one area.
+- **Affordability:** rent is the average of the quarterly median rents over the
+  chosen period, so it is an approximation, not an exact median. Suburbs with few
+  quarters of data are less reliable.
+- **Suburb** can be a single suburb or a group of suburbs, such as
+  Carlton-Parkville.

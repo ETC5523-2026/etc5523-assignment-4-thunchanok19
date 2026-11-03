@@ -69,3 +69,28 @@ The app opens on an About tab and has four tabs in total:
 
 Documentation:
 <https://etc5523-2026.github.io/etc5523-assignment-4-thunchanok19/>
+
+## AI Appendix
+
+I used AI as a coding and writing assistant while building this package,
+app and site. The topic, dataset, research question and design decisions
+were mine, and I tested, edited and checked all AI-assisted code myself.
+
+- **Package structure:** explained how the files in an R package fit
+  together (`DESCRIPTION`, `NAMESPACE`, `R/`, `data-raw/`, `inst/`,
+  roxygen comments) and how to set them up with `usethis` and
+  `devtools`.
+- **Data preparation:** suggested approaches for cleaning the raw CSV in
+  `data-raw/rentals.R`, such as splitting the property description into
+  bedrooms and property type, and removing aggregate rows.
+- **Shiny app:** helped write and debug code for the app, including the
+  tabbed layout, interactive `plotly` charts, the `reactable` table,
+  colours and theme, and the empty-state messages.
+- **Package functions:** helped draft and debug the exported functions
+  and their roxygen documentation.
+- **Documentation:** gave feedback on grammar and wording, and suggested
+  what to include in the README, the app’s About tab and captions, and
+  the vignette.
+- **Troubleshooting:** helped diagnose errors, including a GitHub
+  token (401) error when installing the package from GitHub and a
+  pkgdown setup error.
